@@ -1,21 +1,20 @@
 
-import app from "./app";
-import confiz from "./app/confiz";
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import app from './app';
+import config from './app/config';
 
 
 
 async function main() {
-    try{
-        await mongoose.connect(confiz.database_url  as string);
-  
-    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-    app.listen(confiz.port, () => {
-        console.log(`Example app listening on port ${confiz.port}`)
-      })
-    }catch(error){
-        console.log(error);
-    }
-    }
-  main()
+  try {
+    await mongoose.connect(config.database_url as string);
 
+    app.listen(config.port, () => {
+      console.log(`app is listening on port ${config.port}`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+main();
